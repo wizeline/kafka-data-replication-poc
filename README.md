@@ -41,3 +41,5 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 - https://github.com/simplesteph/kafka-stack-docker-compose
 - https://github.com/wurstmeister/kafka-docker
 - https://github.com/wurstmeister/zookeeper-docker
+- https://github.com/confluentinc/cp-docker-images
+- https://github.com/authorjapps/zerocode-docker-factory/blob/master/compose/kafka-schema-registry.yml
