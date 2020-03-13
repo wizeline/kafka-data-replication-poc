@@ -13,13 +13,7 @@
 7. configure the subscirber to write to parquet
 8. evaluate solution and document findings
 
-## References
-
-https://github.com/simplesteph/kafka-stack-docker-compose
-https://github.com/wurstmeister/kafka-docker
-https://github.com/wurstmeister/zookeeper-docker
-
-##Steps to follow (PoC considering Java as programming language)
+## Steps to follow (PoC considering Java as programming language)
 
 - Download Postgres connector for Java (Check this since it is a connector for Java JDBC: https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
 - Configure JDBC Source Connector (see: https://www.confluent.io/blog/kafka-connect-deep-dive-jdbc-source-connector/)
@@ -33,3 +27,8 @@ https://github.com/wurstmeister/zookeeper-docker
 ``` 
 NOTE: Consider using brokers for a more complete example: https://www.tutorialspoint.com/apache_kafka/apache_kafka_cluster_architecture.htm
 ``` 
+## References
+
+https://github.com/simplesteph/kafka-stack-docker-compose
+https://github.com/wurstmeister/kafka-docker
+https://github.com/wurstmeister/zookeeper-docker
