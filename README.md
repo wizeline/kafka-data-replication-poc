@@ -13,3 +13,8 @@
 7. configure the subscirber to write to parquet
 8. evaluate solution and document findings
 
+## References
+
+https://github.com/simplesteph/kafka-stack-docker-compose
+https://github.com/wurstmeister/kafka-docker
+https://github.com/wurstmeister/zookeeper-docker

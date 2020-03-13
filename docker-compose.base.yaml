@@ -1,0 +1,5 @@
+version: "3"
+services:
+  base:
+    image: wizeline/kafka-base
+    build: images/base
