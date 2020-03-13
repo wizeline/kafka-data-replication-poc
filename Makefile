@@ -1,5 +1,5 @@
 # PHONY targets are not associated with files
-.PHONY: help run build deploy provision-infra
+.PHONY: help run build deploy initialize-dbs provision-infra
 
 # the default target is the first target
 help:
@@ -14,6 +14,7 @@ help:
 	@echo '                                                                          '
 
 run: build
+	@echo 'starting applications'
 	docker-compose up -d
 	@echo 'TBD'
 
@@ -23,6 +24,9 @@ build:
 
 deploy: build
 	@echo 'TBD'
+
+initialize-dbs:
+	@bash ./bin/initialize_dbs.sh
 
 provision-infra:
 	@echo 'TBD'

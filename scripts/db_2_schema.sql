@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS table_b (
    created_on TIMESTAMP NOT NULL
 );
 
+-- TODO: copy some seed data
+
 \dt;
 \d table_b;
