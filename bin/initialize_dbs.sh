@@ -2,5 +2,8 @@
 
 set -exu
 
-psql "postgres://postgres:password@localhost:5432/database_1?sslmode=disable" -f scripts/db_1_schema.sql
-psql "postgres://postgres:password@localhost:5433/database_2?sslmode=disable" -f scripts/db_2_schema.sql
+: ${PSQL_1}
+: ${PSQL_2}
+
+psql "${PSQL_1}" -f scripts/db_1_schema.sql
+psql "${PSQL_2}" -f scripts/db_2_schema.sql
