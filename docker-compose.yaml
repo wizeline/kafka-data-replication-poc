@@ -30,14 +30,14 @@ services:
 
   zookeeper:
     container_name: zookeeper
-    image: confluentinc/cp-zookeeper:5.1.0
+    image: confluentinc/cp-zookeeper:5.1.2
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     container_name: kafka
-    image: confluentinc/cp-kafka:5.1.0
+    image: confluentinc/cp-kafka:5.1.2
     depends_on:
       - zookeeper
     ports:
@@ -45,14 +45,14 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   schema-registry:
     container_name: schema-registry
-    image: confluentinc/cp-schema-registry:5.1.0
+    image: confluentinc/cp-schema-registry:5.1.2
     depends_on:
       - kafka
       - zookeeper
@@ -64,7 +64,7 @@ services:
       - "8081:8081"
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.1.0
+    image: confluentinc/cp-kafka-rest:5.1.2
     depends_on:
       - zookeeper
       - kafka
@@ -72,8 +72,41 @@ services:
     environment:
       KAFKA_REST_HOST_NAME: rest-proxy
       KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_REST_BOOTSTRAP_SERVERS: kafka:29092
+      KAFKA_REST_BOOTSTRAP_SERVERS: kafka:9092
       KAFKA_REST_LISTENERS: http://0.0.0.0:8082
       KAFKA_REST_SCHEMA_REGISTRY_URL: http://schema-registry:8081
     ports:
       - "8082:8082"
+
+  ksql-server:
+    container_name: ksql-server
+    image: confluentinc/cp-ksql-server:5.1.2
+    depends_on:
+      - kafka
+      - schema-registry
+    environment:
+      KSQL_BOOTSTRAP_SERVERS: kafka:9092
+      KSQL_LISTENERS: http://0.0.0.0:8088
+      KSQL_KSQL_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KSQL_KSQL_SERVICE_ID: ksql-server
+
+  connect:
+    # https://hub.docker.com/r/debezium/connect
+    # https://github.com/debezium/docker-images/blob/master/connect/0.10/Dockerfile
+    container_name: connect
+    image: debezium/connect:0.10
+    depends_on:
+      - zookeeper
+      - kafka
+      - pgsql-1
+      - pgsql-2
+    ports:
+      - "8083:8083"
+    environment:
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my-connect-configs
+      OFFSET_STORAGE_TOPIC: my-connect-offsets
+      ADVERTISED_HOST_NAME: connect
+      BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter

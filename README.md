@@ -43,3 +43,6 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 - https://github.com/wurstmeister/zookeeper-docker
 - https://github.com/confluentinc/cp-docker-images
 - https://github.com/authorjapps/zerocode-docker-factory/blob/master/compose/kafka-schema-registry.yml
+- https://highalpha.com/data-stream-processing-for-newbies-with-kafka-ksql-and-postgres/
+- https://github.com/mtpatter/postgres-kafka-demo
+- https://debezium.io/documentation/reference/1.0/architecture.html
