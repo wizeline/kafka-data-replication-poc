@@ -14,6 +14,7 @@ help:
 	@echo '                                                                          '
 
 run: build
+	docker-compose up -d
 	@echo 'TBD'
 
 build:
