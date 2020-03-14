@@ -33,8 +33,40 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 
 ## Running the PoC
 
-1. build the container images `make build`
-1. start the applications `make run`
+1. prepare the environment `source bin/env`
+2. build the container images `make build`
+3. start the applications `make run`. NOTE: you may have to wait at least 30 seconds.
+4. prepare the database `make initialize-dbs`
+5. inject some data to the database:
+
+```shell
+PSQL_URL=$PSQL_1 python scripts/inser_new_rows.py 20
+```
+
+6. configure the kafka cluster:
+
+```shell
+bash bin/config_kafka.sh
+cat config/ksql_config.sql| bin/ksqlcli_pipe.sh
+```
+
+7. list existing kafka resources:
+
+```shell
+cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
+```
+
+8. create source topics and tables:
+
+```shell
+cat scripts/create_source_tables.sql|bin/ksqlcli_pipe.sh
+```
+
+9. list existing kafka resources and compare against results of step 7:
+
+```shell
+cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
+```
 
 ## References
 

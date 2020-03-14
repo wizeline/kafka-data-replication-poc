@@ -4,11 +4,14 @@ version: "3"
 services:
   pgsql-1:
     # postgresql://postgres:password@localhost:5432/database_1
-    image: postgres:9.6
+    # image: postgres:9.6
+    image: debezium/postgres:9.6
     ports:
       - 5432:5432
     volumes:
       - "./pgdata/1:/var/lib/postgresql/data"
+      - "./config/postgresql.conf:/etc/postgresql/postgresql.conf"
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -17,11 +20,14 @@ services:
 
   pgsql-2:
     # postgresql://postgres:password@localhost:5433/database_2
-    image: postgres:9.6
+    # image: postgres:9.6
+    image: debezium/postgres:9.6
     ports:
       - 5433:5432
     volumes:
       - "./pgdata/2:/var/lib/postgresql/data"
+      - "./config/postgresql.conf:/etc/postgresql/postgresql.conf"
+    command: postgres -c 'config_file=/etc/postgresql/postgresql.conf'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -48,6 +54,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   schema-registry:
