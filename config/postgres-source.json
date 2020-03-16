@@ -11,6 +11,13 @@
     "database.server.name": "pgsql_1",
     "database.whitelist": "table_a",
     "database.history.kafka.bootstrap.servers": "kafka:9092",
-    "database.history.kafka.topic": "schema-changes.table_a"
+    "database.history.kafka.topic": "schema-changes.table_a",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "true",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.UnwrapFromEnvelope"
   }
 }

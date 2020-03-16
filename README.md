@@ -37,17 +37,15 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 2. build the container images `make build`
 3. start the applications `make run`. NOTE: you may have to wait at least 30 seconds.
 4. prepare the database `make initialize-dbs`
-5. inject some data to the database:
+5. inject some data to the database `make inset-data`
+6. configure the kafka cluster `make configure`
+7. check status `make status`
+8. insert more data `make inset-data` and check status `make status`
 
-```shell
-PSQL_URL=$PSQL_1 python scripts/inser_new_rows.py 20
-```
+You can inspect the databases with:
 
-6. configure the kafka cluster:
-
-```shell
-make configure
-```
+- `psql $PSQL_1`
+- `psql $PSQL_2`
 
 ## References
 
