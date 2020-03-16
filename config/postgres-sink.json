@@ -3,7 +3,8 @@
   "config": {
     "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
     "tasks.max": "1",
-    "topics": "TABLE_A_SRC_REKEY",
+    "topics": "pgsql_1.public.table_a",
+    "table.name.format": "table_a",
     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
     "value.converter": "io.confluent.connect.avro.AvroConverter",
     "value.converter.schema.registry.url": "http://schema-registry:8081",

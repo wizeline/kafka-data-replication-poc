@@ -1,5 +1,5 @@
 # PHONY targets are not associated with files
-.PHONY: help run build configure deploy logs inset-data initialize-dbs provision-infra
+.PHONY: help run stop build configure deploy logs inset-data initialize-dbs provision-infra
 
 # the default target is the first target
 help:
@@ -8,6 +8,7 @@ help:
 	@echo 'Usage:                                                                    '
 	@echo '   make help                      print this message                      '
 	@echo '   make run                       start the application locally           '
+	@echo '   make stop                      stop the local application              '
 	@echo '   make build                     build the docker images                 '
 	@echo '   make initialize-dbs            TBD                                     '
 	@echo '   make configure                 TBD                                     '
@@ -20,7 +21,11 @@ help:
 run: build
 	@echo 'starting applications'
 	docker-compose up -d
-	@echo 'TBD'
+	bash bin/wait_for_it.sh
+	@echo 'the application in now running!'
+
+stop:
+	docker-compose down
 
 build:
 	docker-compose -f docker-compose.base.yaml build
