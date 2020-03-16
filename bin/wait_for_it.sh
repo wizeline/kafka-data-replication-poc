@@ -1,18 +1,20 @@
 #!/bin/bash
 
-while ! nc -z 127.0.0.1 8083; do
+# NOTE: not sure if this is working as expected
+
+while ! nc -ztv 127.0.0.1 8083; do
     echo "connect not ready, waiting 1 sec..."
     sleep 1
 done
 echo "connect ready!"
 
-while ! nc -z 127.0.0.1 5432; do
+while ! psql $PSQL_1 -c "select 1" >/dev/null 2>&1; do
     echo "db-1 not ready, waiting 1 sec..."
     sleep 1
 done
 echo "db-1 ready!"
 
-while ! nc -z 127.0.0.1 5433; do
+while ! psql $PSQL_2 -c "select 1" >/dev/null 2>&1; do
     echo "db-2 not ready, waiting 1 sec..."
     sleep 1
 done

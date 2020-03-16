@@ -10,10 +10,10 @@ help:
 	@echo '   make run                       start the application locally           '
 	@echo '   make stop                      stop the local application              '
 	@echo '   make build                     build the docker images                 '
-	@echo '   make initialize-dbs            TBD                                     '
-	@echo '   make configure                 TBD                                     '
-	@echo '   make logs                      TBD                                     '
-	@echo '   make inset-data                TBD                                     '
+	@echo '   make initialize-dbs            creates the tables and schemas          '
+	@echo '   make configure                 configures kafka and the connectors     '
+	@echo '   make logs                      show and follow the logs                '
+	@echo '   make inset-data                inserts 10 nre rows                     '
 	@echo '   make deploy                    pushes the images and deploy            '
 	@echo '   make provision-infra           create the required infra for deployment'
 	@echo '                                                                          '
@@ -45,7 +45,7 @@ logs:
 	docker-compose logs -f
 
 inset-data:
-	@bash -c "PSQL_URL=$(PSQL_1) python scripts/inser_new_rows.py 20"
+	@bash -c "PSQL_URL=$(PSQL_1) python scripts/inser_new_rows.py 10"
 
 deploy: build
 	@echo 'TBD'

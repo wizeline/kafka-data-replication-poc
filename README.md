@@ -41,11 +41,23 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 6. configure the kafka cluster `make configure`
 7. check status `make status`
 8. insert more data `make inset-data` and check status `make status`
+9. check replicated data:
 
-You can inspect the databases with:
+```shell
+psql $PSQL_1 -c "select * from table_a;"
+psql $PSQL_2 -c "select * from table_a;"
+```
+
+NOTE: You can inspect the databases with:
 
 - `psql $PSQL_1`
 - `psql $PSQL_2`
+
+## Next Steps
+
+- Deploy the same setup using the confluent platform and RDS in AWS
+- Deploy the same setup using the k8s-kafka operator and RDS in AWS
+- Deploy the same setup using the k8s-kafka operator and cloudsql in GCP
 
 ## References
 
