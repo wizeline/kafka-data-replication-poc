@@ -7,6 +7,12 @@ curl -i -X POST \
     -H "Content-Type: application/json" \
     --data @config/postgres-source.json http://localhost:8083/connectors
 
+sleep 2
+
+curl \
+    -H "Accept:application/json" \
+    http://localhost:8083/connectors/postgres-source | jq .
+
 echo "connectors:"
 
 curl -i \
@@ -15,4 +21,6 @@ curl -i \
 
 echo "kafka-topics:"
 
-docker-compose exec kafka bash -c '/usr/bin/kafka-topics --list --zookeeper zookeeper:2181'
+curl \
+    -H "Accept:application/json" \
+    "http://localhost:8082/topics" | jq .

@@ -8,7 +8,7 @@
     "database.user": "postgres",
     "database.password": "password",
     "database.dbname": "database_1",
-    "database.server.name": "pgsql-1",
+    "database.server.name": "pgsql_1",
     "database.whitelist": "table_a",
     "database.history.kafka.bootstrap.servers": "kafka:9092",
     "database.history.kafka.topic": "schema-changes.table_a",

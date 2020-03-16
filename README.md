@@ -46,32 +46,7 @@ PSQL_URL=$PSQL_1 python scripts/inser_new_rows.py 20
 6. configure the kafka cluster:
 
 ```shell
-bash bin/config_kafka.sh
-cat config/ksql_config.sql| bin/ksqlcli_pipe.sh
-```
-
-7. list existing kafka resources:
-
-```shell
-cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
-```
-
-8. create source topics and tables:
-
-```shell
-cat scripts/create_source_tables.sql|bin/ksqlcli_pipe.sh
-```
-
-9. list existing kafka resources and compare against results of step 7:
-
-```shell
-cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
-```
-
-9. config kafka sink table
-
-```shell
-bash bin/config_kafka_sink_table.sh
+make configure
 ```
 
 ## References
