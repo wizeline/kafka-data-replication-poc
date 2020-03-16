@@ -47,3 +47,8 @@ deploy: build
 
 provision-infra:
 	@echo 'TBD'
+
+status:
+	docker-compose ps
+	cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
+	bash bin/get_tasks_status.sh

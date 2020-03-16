@@ -99,11 +99,11 @@ services:
 
   connect:
     # https://hub.docker.com/r/debezium/connect
-    # https://github.com/debezium/docker-images/blob/master/connect/0.10/Dockerfile
+    # https://github.com/debezium/docker-images/blob/master/connect/1.1/Dockerfile
     container_name: connect
     build:
       args:
-        - BASE_VERSION=0.10
+        - BASE_VERSION=1.1
       context: images/debezium-connect
     depends_on:
       - zookeeper

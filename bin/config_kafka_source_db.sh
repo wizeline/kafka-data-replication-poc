@@ -7,6 +7,12 @@ curl -i -X POST \
     -H "Content-Type: application/json" \
     --data @config/postgres-source.json http://localhost:8083/connectors
 
+curl -i -X PUT \
+    -H "Accept:application/json" \
+    -H "Content-Type: application/json" \
+    --data "$(jq '.config' config/postgres-source.json)" \
+    http://localhost:8083/connectors/postgres-source/config
+
 sleep 2
 
 curl \
