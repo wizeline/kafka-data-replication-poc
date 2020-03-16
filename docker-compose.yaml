@@ -36,14 +36,14 @@ services:
 
   zookeeper:
     container_name: zookeeper
-    image: confluentinc/cp-zookeeper:5.1.2
+    image: confluentinc/cp-zookeeper:5.3.3
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     container_name: kafka
-    image: confluentinc/cp-kafka:5.1.2
+    image: confluentinc/cp-kafka:5.3.3
     depends_on:
       - zookeeper
     ports:
@@ -59,7 +59,7 @@ services:
 
   schema-registry:
     container_name: schema-registry
-    image: confluentinc/cp-schema-registry:5.1.2
+    image: confluentinc/cp-schema-registry:5.3.3
     depends_on:
       - kafka
       - zookeeper
@@ -71,7 +71,7 @@ services:
       - "8081:8081"
 
   rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.1.2
+    image: confluentinc/cp-kafka-rest:5.3.3
     depends_on:
       - zookeeper
       - kafka
@@ -87,7 +87,7 @@ services:
 
   ksql-server:
     container_name: ksql-server
-    image: confluentinc/cp-ksql-server:5.1.2
+    image: confluentinc/cp-ksql-server:5.3.3
     depends_on:
       - kafka
       - schema-registry
@@ -101,7 +101,10 @@ services:
     # https://hub.docker.com/r/debezium/connect
     # https://github.com/debezium/docker-images/blob/master/connect/0.10/Dockerfile
     container_name: connect
-    image: debezium/connect:0.10
+    build:
+      args:
+        - BASE_VERSION=0.10
+      context: images/debezium-connect
     depends_on:
       - zookeeper
       - kafka

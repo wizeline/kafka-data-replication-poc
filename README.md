@@ -68,6 +68,12 @@ cat scripts/create_source_tables.sql|bin/ksqlcli_pipe.sh
 cat scripts/show_kafka_resources.sql|bin/ksqlcli_pipe.sh
 ```
 
+9. config kafka sink table
+
+```shell
+bash bin/config_kafka_sink_table.sh
+```
+
 ## References
 
 - https://github.com/simplesteph/kafka-stack-docker-compose
