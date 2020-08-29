@@ -51,7 +51,7 @@ Image 4: Large Cluster Reference Architecture
 2. build the container images `make build`
 3. start the applications `make run`. NOTE: you may have to wait at least 30 seconds.
 4. prepare the database `make initialize-dbs`
-5. inject some data to the database `make inset-data`
+5. inject some data to the database `make inset-data` for pre-cdc-enabled data
 6. configure the kafka cluster `make configure`
 7. check status `make status`
 8. insert more data `make inset-data` and check status `make status`
@@ -89,6 +89,8 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 
 ## References
 
+- \* https://debezium.io/documentation/reference/1.2/architecture.html
+- \* https://github.com/confluentinc/cp-docker-images
 - https://github.com/simplesteph/kafka-stack-docker-compose
 - https://github.com/wurstmeister/kafka-docker
 - https://github.com/wurstmeister/zookeeper-docker
@@ -96,4 +98,3 @@ NOTE: Consider using brokers for a more complete example: https://www.tutorialsp
 - https://github.com/authorjapps/zerocode-docker-factory/blob/master/compose/kafka-schema-registry.yml
 - https://highalpha.com/data-stream-processing-for-newbies-with-kafka-ksql-and-postgres/
 - https://github.com/mtpatter/postgres-kafka-demo
-- https://debezium.io/documentation/reference/1.0/architecture.html
